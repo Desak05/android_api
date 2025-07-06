@@ -1,29 +1,35 @@
 <?php
-session_start();
 include 'koneksi.php';
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["success" => false, "message" => "User belum login"]);
-    exit;
-}
+header('Content-Type: application/json');
 
-$user_id = $_SESSION['user_id'];
-
-// Ambil riwayat berdasarkan user
-$query = "SELECT u.nama AS nama_user, menu_makanan.nama AS nama_makanan, 
+// Query untuk ambil data riwayat dan nama makanan
+$query = "SELECT rp.id, rp.id_makanan, menu_makanan.nama AS nama_makanan, 
                  rp.jumlah, rp.total_harga 
           FROM riwayat_pesanan rp 
-          JOIN users u ON rp.user_id = u.id_user
           JOIN menu_makanan ON rp.id_makanan = menu_makanan.id
-          WHERE rp.user_id = '$user_id'
-          ORDER BY rp.id_pesanan DESC";
+          ORDER BY rp.id DESC";
 
 $result = mysqli_query($conn, $query);
 
-$data = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
-}
+$response = [];
 
-echo json_encode($data);
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $response[] = [
+            'id' => (int) $row['id'],
+            'id_makanan' => (int) $row['id_makanan'],
+            'nama_makanan' => $row['nama_makanan'],
+            'jumlah' => (int) $row['jumlah'],
+            'total_harga' => (int) $row['total_harga']
+        ];
+    }
+
+    echo json_encode($response);
+} else {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Gagal mengambil data: ' . mysqli_error($conn)
+    ]);
+}
 ?>

@@ -1,5 +1,5 @@
 <?php
-session_start(); // WAJIB di awal untuk bisa pakai $_SESSION
+header('Content-Type: application/json');
 include 'koneksi.php';
 
 $username = isset($_POST['username']) ? $_POST['username'] : '';
@@ -15,17 +15,15 @@ $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
-
     if ($password == $row['password']) {
-
-        $_SESSION['user_id'] = $row['id_user'];
-        $_SESSION['nama_user'] = $row['nama']; // opsional
-
-        echo json_encode(["success" => true, "message" => "Login berhasil"]);
+        echo json_encode([
+            "success" => true,
+            "message" => "Login berhasil",
+            "id" => $row['id']
+        ]);
     } else {
         echo json_encode(["success" => false, "message" => "Password salah"]);
     }
 } else {
     echo json_encode(["success" => false, "message" => "Username tidak ditemukan"]);
 }
-?>
