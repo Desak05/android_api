@@ -1,13 +1,15 @@
 <?php
 include 'koneksi.php';
-
 header('Content-Type: application/json');
 
-// Query untuk ambil data riwayat dan nama makanan
+$id_user = $_POST['id_user']; // Ambil id_user dari POST (Android harus kirim ini)
+
+// Query hanya untuk user tersebut
 $query = "SELECT rp.id, rp.id_makanan, menu_makanan.nama AS nama_makanan, 
                  rp.jumlah, rp.total_harga 
           FROM riwayat_pesanan rp 
           JOIN menu_makanan ON rp.id_makanan = menu_makanan.id
+          WHERE rp.id_users = '$id_user'
           ORDER BY rp.id DESC";
 
 $result = mysqli_query($conn, $query);
