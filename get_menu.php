@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 
-$query = mysqli_query($conn, "SELECT * FROM menu_makanan");
+$query = mysqli_query($koneksi, "SELECT * FROM menu_makanan");
 
 $result = array();
 while ($row = mysqli_fetch_assoc($query)) {

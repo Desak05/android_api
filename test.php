@@ -12,7 +12,7 @@ $query = "SELECT u.nama AS nama_user, menu_makanan.nama AS nama_makanan,
           WHERE rp.user_id = '$user_id'
           ORDER BY rp.id_pesanan DESC";
 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($koneksi, $query);
 
 $data = array();
 while ($row = mysqli_fetch_assoc($result)) {

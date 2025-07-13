@@ -11,7 +11,7 @@ if (empty($username) || empty($password)) {
 }
 
 $sql = "SELECT * FROM users WHERE username = '$username'";
-$result = $conn->query($sql);
+$result = $koneksi->query($sql);
 
 if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();

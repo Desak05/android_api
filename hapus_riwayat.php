@@ -9,7 +9,7 @@ if (empty($id)) {
 }
 
 $query = "DELETE FROM riwayat_pesanan WHERE id = ?";
-$stmt = $conn->prepare($query);
+$stmt = $koneksi->prepare($query);
 $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {

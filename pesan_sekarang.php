@@ -11,8 +11,8 @@ $total_harga = $_POST['total_harga'];
 $query = "INSERT INTO riwayat_pesanan (id_users, id_makanan, jumlah, total_harga) 
           VALUES ('$id_user', '$id_makanan', '$jumlah', '$total_harga')";
 
-if (mysqli_query($conn, $query)) {
+if (mysqli_query($koneksi, $query)) {
     echo json_encode(["success" => true, "message" => "Pesanan berhasil disimpan"]);
 } else {
-    echo json_encode(["success" => false, "message" => "Gagal menyimpan pesanan: " . mysqli_error($conn)]);
+    echo json_encode(["success" => false, "message" => "Gagal menyimpan pesanan: " . mysqli_error($koneksi)]);
 }

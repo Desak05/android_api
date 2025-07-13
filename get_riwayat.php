@@ -12,7 +12,7 @@ $query = "SELECT rp.id, rp.id_makanan, menu_makanan.nama AS nama_makanan,
           WHERE rp.id_users = '$id_user'
           ORDER BY rp.id DESC";
 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($koneksi, $query);
 
 $response = [];
 
@@ -31,7 +31,7 @@ if ($result) {
 } else {
     echo json_encode([
         'success' => false,
-        'message' => 'Gagal mengambil data: ' . mysqli_error($conn)
+        'message' => 'Gagal mengambil data: ' . mysqli_error($koneksi)
     ]);
 }
 ?>

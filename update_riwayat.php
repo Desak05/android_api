@@ -10,7 +10,7 @@ if (isset($_POST['id']) && isset($_POST['id_makanan']) && isset($_POST['jumlah']
 
     // Query update
     $query = "UPDATE riwayat_pesanan SET id_makanan = '$id_makanan', jumlah = '$jumlah', total_harga = '$total_harga' WHERE id = '$id'";
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($koneksi, $query);
 
     if ($result) {
         echo json_encode([
@@ -20,7 +20,7 @@ if (isset($_POST['id']) && isset($_POST['id_makanan']) && isset($_POST['jumlah']
     } else {
         echo json_encode([
             "success" => false,
-            "message" => "Query gagal: " . mysqli_error($conn)
+            "message" => "Query gagal: " . mysqli_error($koneksi)
         ]);
     }
 } else {
