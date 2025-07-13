@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$port = 3306;
+$port = 3307;
 $db = "uas_mobile";
 
 $koneksi = new mysqli($host, $user, $pass, $db, $port);
